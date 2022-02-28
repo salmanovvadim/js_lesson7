@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+  <html lang="ru">
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Пример работы с Cookies</title>
+      <script type="text/javascript" src="js_lesson7/js/myCookieUtil.js"></script>
+      <script type="text/javascript" src="js_lesson7/js/myEventUtil.js"></script>
+    </head>
+    <body>
+      <p>ФИО студента: <span id="name-value">(none)</span><br>
+         Возраст: <span id="age-value">(none)</span><br>
+         Оценка за экзамен: <span id="grade-value">(none)</span>
+      </p>
+      <input type="button" value="Удалить файлы cookie" id="delete-btn">
+      <p>Обновите страницу в браузере, чтобы увидеть значения. Нажмите кнопку &quot;Удалить файлы cookie&quot; для их удаления.</p>
+
+      <script type="text/javascript">
+        myEventUtil.addHandler(window, "load", function () {
+          document.getElementById("name-value").innerHTML = myCookieUtil.get("name");
+          document.getElementById("age-value").innerHTML = myCookieUtil.get("age");
+          document.getElementById("grade-value").innerHTML = myCookieUtil.get("grade");
+          myEventUtil.addHandler(document.getElementById("delete-btn"), "click", function () {
+          //Delete cookie (Удаление cookie-файлов)
+            myCookieUtil.unset("name");
+            myCookieUtil.unset("age");
+            myCookieUtil.unset("grade");
+          });
+        //Setting a cookie with the student's name, age, and grade (Задание cookie-файла с ФИО студента, возрастом и оценкой)
+          myCookieUtil.set("name", "Салманов Вадим Игоревич");
+          myCookieUtil.set("age", "33");
+          myCookieUtil.set("grade", "8");
+        });
+      </script>
+    </body>
+  </html>
